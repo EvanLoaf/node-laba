@@ -1,4 +1,5 @@
 require('./Task1.StringArithmeticOperations');
+const { describe, it, assert} = require('../util/jest-test-functions.util');
 
 describe('Arithmetic operations with string numbers', () => {
   it('addition', () => {
@@ -25,24 +26,3 @@ describe('Arithmetic operations with string numbers', () => {
     assert('5'.divide('3453453545463546646') === '{"result":"0","remainder":"5"}', 'Division Error');
   });
 });
-
-function assert(condition, errorMessage) {
-  if (!condition) {
-    throw new Error(errorMessage);
-  }
-}
-
-function describe(description, callback) {
-  console.log(description);
-  callback();
-}
-
-function it(testDescription, testBody) {
-  try {
-    testBody();
-    console.log(`\t✓ ${testDescription}`);
-  } catch (error) {
-    console.error(`\t✕ ${testDescription}`);
-    console.error(`\t  ${error.message}`);
-  }
-}
