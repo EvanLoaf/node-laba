@@ -106,6 +106,52 @@ describe('Data Transformers Test', () => {
     })(), 'Expected an Error: Cannot convert Symbol to Number');
   });
 
+  it('Convert to Number with NaN check function', () => {
+    assert(dataTransformer.convertToNumberWithNanCheck(123) === 123, 'Error converting Number to Number with NaN check');
+    assert(dataTransformer.convertToNumberWithNanCheck(123.45) === 123.45, 'Error converting Number with decimals to Number with NaN check');
+    assert(dataTransformer.convertToNumberWithNanCheck('502') === 502, 'Error converting String to Number with NaN check');
+    assert(dataTransformer.convertToNumberWithNanCheck('   1000abc') === 1000, 'Error converting Non-Number String to Number with NaN check');
+    assert(dataTransformer.convertToNumberWithNanCheck([]) === 0, 'Error converting Empty Array to Number with NaN check');
+    assert((() => {
+      try {
+        dataTransformer.convertToNumberWithNanCheck([1,2,3]);
+        return false;
+      } catch (e) {
+        return e.message === 'Unable to convert value to Number';
+      }
+    })(), 'Expected an Error: Unable to convert value to Number');
+    assert(dataTransformer.convertToNumberWithNanCheck([11]) === 11, 'Error converting One-digit Array to Number with NaN check');
+    assert(dataTransformer.convertToNumberWithNanCheck(null) === 0, 'Error converting Null to Number with NaN check');
+    assert((() => {
+      try {
+        dataTransformer.convertToNumberWithNanCheck(undefined);
+        return false;
+      } catch (e) {
+        return e.message === 'Unable to convert value to Number';
+      }
+    })(), 'Expected an Error: Unable to convert value to Number');
+    assert(dataTransformer.convertToNumberWithNanCheck(new Date(Date.UTC(2023, 6, 23))) === 1690070400000, 'Error converting Date to Number with NaN check');
+    assert((() => {
+      try {
+        dataTransformer.convertToNumberWithNanCheck(() => {});
+        return false;
+      } catch (e) {
+        return e.message === 'Unable to convert value to Number';
+      }
+    })(), 'Expected an Error: Unable to convert value to Number');
+    assert(dataTransformer.convertToNumberWithNanCheck({
+      valueOf: () => 100,
+    }) === 100, 'Error converting Object with valueOf to Number with NaN check');
+    assert((() => {
+      try {
+        dataTransformer.convertToNumberWithNanCheck(Symbol('Java'));
+        return false;
+      } catch (e) {
+        return e.message === 'Cannot convert Symbol to Number';
+      }
+    })(), 'Expected an Error: Cannot convert Symbol to Number');
+  });
+
   it('Coerce to Type function', () => {
     assert(dataTransformer.coerceToType(909090, 'string') === '909090', 'Error coercing a Number to string');
     assert(dataTransformer.coerceToType(123123123789789789n, 'string') === '123123123789789789', 'Error coercing a BigInt to string');
@@ -118,7 +164,7 @@ describe('Data Transformers Test', () => {
     assert(dataTransformer.coerceToType(Symbol('Java'), 'string') === 'Symbol(Java)', 'Error coercing a Symbol to string');
 
     assert(dataTransformer.coerceToType(123, 'number') === 123, 'Error coercing Number to Number');
-    assert(dataTransformer.convertToNumber(123.45, 'number') === 123.45, 'Error coercing Number with decimals to Number');
+    assert(dataTransformer.coerceToType(123.45, 'number') === 123.45, 'Error coercing Number with decimals to Number');
     assert(dataTransformer.coerceToType('502', 'number') === 502, 'Error coercing String to Number');
     assert(dataTransformer.coerceToType('   1000abc', 'number') === 1000, 'Error coercing Non-Number String to Number');
     assert(dataTransformer.coerceToType([], 'number') === 0, 'Error coercing Empty Array to Number');
