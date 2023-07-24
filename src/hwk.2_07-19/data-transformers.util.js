@@ -33,6 +33,21 @@ function convertToNumber(value) {
   return Number(value);
 }
 
+function convertToNumberWithNanCheck(value) {
+  if (typeof value === 'symbol') {
+    throw Error('Cannot convert Symbol to Number');
+  } else if (typeof value === 'number') {
+    return value;
+  } else if (typeof value === 'string') {
+    return parseFloat(value) || parseInt(value, 10);
+  }
+  const result = Number(value);
+  if (result !== result) {
+    throw new Error('Unable to convert value to Number');
+  }
+  return result;
+}
+
 function coerceToType(value, type) {
   switch(type) {
     case 'string': return stringifyValue(value);
@@ -48,5 +63,6 @@ module.exports = {
   stringifyValue,
   invertBoolean,
   convertToNumber,
+  convertToNumberWithNanCheck,
   coerceToType
 }
