@@ -217,11 +217,11 @@ describe('Homework 3 Tests', () => {
         const students = [
           {
             name: 'Mikhail',
-            grades: [100, 80, 90],
+            grades: [40, 30, 20],
           },
           {
             name: 'Alexandrina',
-            grades: [40, 30, 20],
+            grades: [100, 80, 90],
           },
           {
             name: 'Ilya',
@@ -238,11 +238,11 @@ describe('Homework 3 Tests', () => {
         const students = [
           {
             name: 'Mikhail',
-            grades: [100, 80, 90],
+            grades: [40, 30, 20],
           },
           {
             name: 'Alexandrina',
-            grades: [40, 30, 20],
+            grades: [100, 80, 90],
           },
           {
             name: 'Ilya',
