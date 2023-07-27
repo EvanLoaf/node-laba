@@ -185,7 +185,7 @@ describe('Homework 3 Tests', () => {
         const sentence = 'I will never use LLMs to do my homework'
         const text = `${sentence} ${sentence} ${sentence} ${sentence} ${sentence}`;
         assert(
-          deepEqualWithAnyOrder(filterUniqueWords(text), sentence.split(' ').sort()) === true,
+          deepEqualWithAnyOrder(filterUniqueWords(text), sentence.split(' ').map(word => word.toLowerCase()).sort()) === true,
           'Error performing unique word filtering'
         );
       })
