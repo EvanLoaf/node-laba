@@ -27,3 +27,4 @@ logs
 !.vscode/extensions.json
 
 ormconfig.json
+package-lock.json
