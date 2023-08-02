@@ -27,6 +27,7 @@ describe('Homework 4 Tests', () => {
 				lastName: 'Biden',
 				age: 120,
 				email: 'cool.joe@mail.gov',
+				newProp: 'Java is better',
 			};
 			assert(
 				deepEqualWithAnyOrder(person.updateInfo(updatedInfo), updatedInfo),

@@ -4,19 +4,19 @@ export const person = {
 	age: 30,
 	email: 'john.doe@example.com',
 	updateInfo: function (info) {
+		const keys = Object.keys(info).filter(key => {
+			return Object.getOwnPropertyDescriptor(info, key).writable;
+		});
+		const properties = {};
+		for (let key of keys) {
+			const descriptor = { value: info[key] };
+			if (!this.hasOwnProperty(key)) {
+				descriptor.enumerable = true;
+			}
+			properties[key] = descriptor;
+		}
 		Object.defineProperties(this, {
-			firstName: {
-				value: info.firstName ?? this.firstName,
-			},
-			lastName: {
-				value: info.lastName ?? this.lastName,
-			},
-			age: {
-				value: info.age ?? this.age,
-			},
-			email: {
-				value: info.email ?? this.email,
-			},
+			...properties,
 		});
 		return this;
 	},
