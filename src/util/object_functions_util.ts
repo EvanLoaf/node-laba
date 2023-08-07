@@ -36,7 +36,10 @@ export function deepEqualWithAnyOrder(obj1, obj2) {
 		keys1.sort();
 		keys2.sort();
 		for (const key of keys1) {
-			if (!keys2.includes(key) || !deepEqualWithAnyOrder(obj1[key], obj2[key])) {
+			if (
+				!keys2.includes(key) ||
+				!deepEqualWithAnyOrder(obj1[key], obj2[key])
+			) {
 				return false;
 			}
 		}
@@ -72,18 +75,22 @@ export function deepCopy(obj) {
 			clone = [];
 			cache.set(obj, clone);
 
-			obj.forEach(item => clone.push(copy(item)));
+			obj.forEach((item) => clone.push(copy(item)));
 		} else {
 			clone = {};
 			cache.set(obj, clone);
 
-			Object.keys(obj).forEach(key => {
+			Object.keys(obj).forEach((key) => {
 				if (typeof obj[key] === 'object') {
 					clone[key] = copy(obj[key]);
 				} else if (typeof obj[key] === 'function') {
 					clone[key] = obj[key];
 				} else {
-					Object.defineProperty(clone, key, Object.getOwnPropertyDescriptor(obj, key));
+					Object.defineProperty(
+						clone,
+						key,
+						Object.getOwnPropertyDescriptor(obj, key),
+					);
 				}
 			});
 		}
