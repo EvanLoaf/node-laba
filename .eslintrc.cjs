@@ -5,9 +5,10 @@ module.exports = {
 		es2021: true,
 		node: true,
 	},
+	parser: '@typescript-eslint/parser',
 	root: true,
-	extends: ['prettier', 'plugin:prettier/recommended'],
-	plugins: ['prettier'],
+	extends: ['prettier', 'plugin:prettier/recommended', 'eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+	plugins: ['prettier', '@typescript-eslint'],
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
