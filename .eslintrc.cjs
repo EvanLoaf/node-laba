@@ -20,7 +20,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['*.js'],
+			files: ['*.js', '*.ts'],
 			extends: ['plugin:prettier/recommended', 'prettier'],
 			plugins: ['prettier'],
 			rules: {
