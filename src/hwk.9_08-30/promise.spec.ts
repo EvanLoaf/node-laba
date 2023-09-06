@@ -55,6 +55,30 @@ describe('Homework 9', () => {
 			});
 			expect(expected).toStrictEqual(actual);
 		});
+
+		it('should settle the input with timeouts', async () => {
+			const promise1 = new Promise(resolve => {
+				setTimeout(() => {
+					resolve('Resolved after 50ms');
+				}, 100);
+			});
+
+			const promise2 = new Promise((_, reject) => {
+				setTimeout(() => {
+					reject('Rejected after 30ms');
+				}, 50);
+			});
+
+			const promises = [promise1, promise2];
+
+			return promiseAllSettled(promises).then(results => {
+				console.log(results);
+				expect(results).toBe([
+					{ status: 'fulfilled', value: 'Resolved after 100ms' },
+					{ status: 'rejected', reason: 'Rejected after 50ms' },
+				]);
+			});
+		});
 	});
 
 	describe('Task 3: Implement Chaining of Promises as a Separate Function', () => {
