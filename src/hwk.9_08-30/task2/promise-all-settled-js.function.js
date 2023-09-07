@@ -1,14 +1,14 @@
-export function promiseAllSettled(promises: Promise<any>[]): Promise<any[]> {
-	const settled: object[] = [];
-	function settlePromise(index: number): Promise<any> {
+function promiseAllSettled(promises) {
+	const settled = [];
+	function settlePromise(index) {
 		if (index > promises.length - 1) {
-			return;
+			return Promise.resolve();
 		}
 		return promises[index]
-			.then((value: any) => {
+			.then(value => {
 				settled.push({ status: 'fulfilled', value: value });
 			})
-			.catch((e: Error) => {
+			.catch(e => {
 				settled.push({ status: 'rejected', reason: e });
 			})
 			.then(() => settlePromise(index + 1));
