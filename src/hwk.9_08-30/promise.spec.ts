@@ -59,13 +59,13 @@ describe('Homework 9', () => {
 		it('should settle the input with timeouts', async () => {
 			const promise1 = new Promise(resolve => {
 				setTimeout(() => {
-					resolve('Resolved after 50ms');
+					resolve('Resolved after 100ms');
 				}, 100);
 			});
 
 			const promise2 = new Promise((_, reject) => {
 				setTimeout(() => {
-					reject('Rejected after 30ms');
+					reject('Rejected after 50ms');
 				}, 50);
 			});
 
@@ -73,7 +73,7 @@ describe('Homework 9', () => {
 
 			return promiseAllSettled(promises).then(results => {
 				console.log(results);
-				expect(results).toBe([
+				expect(results).toStrictEqual([
 					{ status: 'fulfilled', value: 'Resolved after 100ms' },
 					{ status: 'rejected', reason: 'Rejected after 50ms' },
 				]);

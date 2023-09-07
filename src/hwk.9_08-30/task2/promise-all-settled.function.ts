@@ -1,35 +1,9 @@
+import { promiseAll } from '../task1/promise-all.function';
+
 export function promiseAllSettled(promises: Promise<any>[]): Promise<any[]> {
-	const settled: object[] = [];
-	function settlePromise(index: number): Promise<any> {
-		if (index > promises.length - 1) {
-			return;
-		}
-		return promises[index]
-			.then((value: any) => {
-				settled.push({ status: 'fulfilled', value: value });
-			})
-			.catch((e: Error) => {
-				settled.push({ status: 'rejected', reason: e });
-			})
-			.then(() => settlePromise(index + 1));
-	}
-	return settlePromise(0).then(() => settled);
+	return promiseAll(
+		promises.map((promise: Promise<any>) =>
+			promise.then((value: any) => ({ status: 'fulfilled', value: value })).catch((e: Error) => ({ status: 'rejected', reason: e }))
+		)
+	);
 }
-
-const promise1 = new Promise(resolve => {
-	setTimeout(() => {
-		resolve('Resolved after 100ms');
-	}, 100);
-});
-
-const promise2 = new Promise((_, reject) => {
-	setTimeout(() => {
-		reject('Rejected after 50ms');
-	}, 50);
-}).catch(e => e);
-
-const promises = [promise1, promise2];
-
-promiseAllSettled(promises).then(results => {
-	console.log(results);
-});
