@@ -36,10 +36,7 @@ export function deepEqualWithAnyOrder(obj1, obj2) {
 		keys1.sort();
 		keys2.sort();
 		for (const key of keys1) {
-			if (
-				!keys2.includes(key) ||
-				!deepEqualWithAnyOrder(obj1[key], obj2[key])
-			) {
+			if (!keys2.includes(key) || !deepEqualWithAnyOrder(obj1[key], obj2[key])) {
 				return false;
 			}
 		}
@@ -75,22 +72,18 @@ export function deepCopy(obj) {
 			clone = [];
 			cache.set(obj, clone);
 
-			obj.forEach((item) => clone.push(copy(item)));
+			obj.forEach(item => clone.push(copy(item)));
 		} else {
 			clone = {};
 			cache.set(obj, clone);
 
-			Object.keys(obj).forEach((key) => {
+			Object.keys(obj).forEach(key => {
 				if (typeof obj[key] === 'object') {
 					clone[key] = copy(obj[key]);
 				} else if (typeof obj[key] === 'function') {
 					clone[key] = obj[key];
 				} else {
-					Object.defineProperty(
-						clone,
-						key,
-						Object.getOwnPropertyDescriptor(obj, key),
-					);
+					Object.defineProperty(clone, key, Object.getOwnPropertyDescriptor(obj, key));
 				}
 			});
 		}
@@ -100,4 +93,37 @@ export function deepCopy(obj) {
 	}
 
 	return copy(obj);
+}
+
+export function deepCopyBFS(obj) {
+	const cache = new WeakMap();
+	const queue = [obj];
+
+	while (queue.length > 0) {
+		const current = queue.shift();
+
+		if (typeof current !== 'object' || current === null) {
+			continue;
+		}
+
+		let clone = cache.get(current);
+		if (!clone) {
+			clone = Array.isArray(current) ? [] : {};
+			cache.set(current, clone);
+		}
+
+		for (const key in current) {
+			if (current[key] === current) {
+				clone[key] = clone;
+			} else if (typeof current[key] === 'object') {
+				clone[key] = Array.isArray(current[key]) ? [] : {};
+				cache.set(current[key], clone[key]);
+				queue.push(current[key]);
+			} else {
+				clone[key] = current[key];
+			}
+		}
+	}
+
+	return cache.get(obj);
 }
