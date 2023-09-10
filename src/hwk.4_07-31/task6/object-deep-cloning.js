@@ -1,3 +1,3 @@
-import { deepCopy } from '../../util/object_functions_util.ts';
+import { deepCopy } from '../../util/object-functions.util.ts';
 
 export const deepCloneObject = deepCopy;

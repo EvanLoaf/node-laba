@@ -3,7 +3,7 @@ import { person } from './task1/object-property-manipulation.js';
 import { product, deleteNonConfigurable, getTotalPrice } from './task2/object-property-enumeration-and-deletion.js';
 import { bankAccount } from './task3/object-property-getters-and-setters.js';
 import { createImmutableObject } from './task4/advanced-property-descriptors.js';
-import { deepEqualWithAnyOrder, deepCopy } from '../util/object_functions_util.ts';
+import { deepEqualWithAnyOrder, deepCopy } from '../util/object-functions.util.ts';
 import { observeObject, callback } from './task5/object-observation.js';
 import { deepCloneObject } from './task6/object-deep-cloning.js';
 import { validateObject } from './task7/object-property-validation.js';

@@ -4,7 +4,7 @@ import {
 } from './task1/advance_array_filtering';
 import { chunkArray } from './task2/array_chunking';
 import { customShuffle } from './task3/array_shuffling';
-import { deepEqualWithAnyOrder } from '../util/object_functions_util';
+import { deepEqualWithAnyOrder } from '../util/object-functions.util';
 import {
 	getArrayIntersection,
 	getArrayUnion,

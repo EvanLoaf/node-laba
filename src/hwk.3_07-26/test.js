@@ -1,5 +1,5 @@
 const { describe, it, assert } = require('../util/jest-test-functions.util');
-const { deepEqualWithAnyOrder } = require('../util/object_functions_util.ts');
+const { deepEqualWithAnyOrder } = require('../util/object-functions.util.ts');
 const { calculateDiscountedPrice } = require('./task1/calculate-discounted-price');
 const { calculateTotalPrice } = require('./task1/calculate-total-price');
 const { filterUniqueWords } = require('./task2/filter-unique-words');

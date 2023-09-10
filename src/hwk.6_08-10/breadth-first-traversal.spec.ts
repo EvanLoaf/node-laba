@@ -1,4 +1,4 @@
-import { deepCopyBFS, deepEqualWithAnyOrder } from '../util/object_functions_util';
+import { deepCopyBFS, deepEqualWithAnyOrder } from '../util/object-functions.util';
 
 describe('Deep copy method for objects using breadth-first tree traversal algo', () => {
 	it('Should create a deep clone of a complex object using breadth-first tree traversal algo', () => {

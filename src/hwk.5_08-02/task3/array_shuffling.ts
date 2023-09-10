@@ -1,4 +1,4 @@
-import { getRandomInt } from '../../util/generation_util';
+import { getRandomInt } from '../../util/generation.util';
 
 export function customShuffle(array: any[]) {
 	const shuffledArray: any[] = [...array];
