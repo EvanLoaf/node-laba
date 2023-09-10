@@ -9,6 +9,7 @@ export class Cart {
 	}
 
 	// Method to add a book to the cart
+	// A book is only added when it is available
 	addBook(book: Book) {
 		if (book.availability > 0) {
 			book.availability--;
