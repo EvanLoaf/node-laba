@@ -7,4 +7,8 @@ export class Book {
 		public price: number,
 		public availability: number
 	) {}
+
+	public getInfo(): string {
+		return `Book: ${this.title}, Author: ${this.author}`;
+	}
 }

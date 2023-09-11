@@ -10,7 +10,7 @@ export class Cart {
 
 	// Method to add a book to the cart
 	// A book is only added when it is available
-	addBook(book: Book) {
+	public addBook(book: Book) {
 		if (book.availability > 0) {
 			book.availability--;
 			this._items.push(book);
@@ -20,7 +20,7 @@ export class Cart {
 	}
 
 	// Method to remove a book from the cart
-	removeBook(book: Book) {
+	public removeBook(book: Book) {
 		const index: number = this._items.indexOf(book);
 		if (index !== -1) {
 			this._items.splice(index, 1);
@@ -28,7 +28,7 @@ export class Cart {
 	}
 
 	// Method to calculate the total price of books in the cart
-	calculateTotalPrice(): number {
+	public calculateTotalPrice(): number {
 		return this._items.reduce((total: number, book: Book) => total + book.price, 0);
 	}
 }

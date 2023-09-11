@@ -3,11 +3,17 @@ import { User } from './entity/user.entity';
 import { Cart } from './entity/cart.entity';
 import { Order } from './entity/order.entity';
 import { Discount } from './entity/discount.entity';
+import { CookingBook } from './entity/cooking-book.entity';
+import { ScienceBook } from './entity/science-book.entity';
 
 // Instantiate Book objects
 const book1: Book = new Book('The Great Gatsby', 'F. Scott Fitzgerald', '978-3-16-148410-0', 15.99, 10);
-const book2: Book = new Book('To Kill a Mockingbird', 'Harper Lee', '978-0-06-112008-4', 12.49, 15);
-const book3: Book = new Book('1984', 'George Orwell', '978-0-452-28423-4', 10.99, 20);
+const book2: Book = new CookingBook('Top 50 Recipes', 'Harper Lee', '978-0-06-112008-4', 12.49, 15, 'Asian');
+const book3: Book = new ScienceBook('Entropy', 'George Orwell', '978-0-452-28423-4', 10.99, 20, 'Physics');
+
+console.log(`Book1 info: ${book1.getInfo()}`); // Outputs: Book title & Author
+console.log(`Book2 info: ${book2.getInfo()}`); // Outputs: Book title, Author & Cuisine
+console.log(`Book3 info: ${book3.getInfo()}`); // Outputs: Book title, Author & Subject
 
 // Instantiate User objects
 const john: User = new User('John Doe', 'johndoe@example.com', 'john123');

@@ -11,7 +11,7 @@ export class Order {
 	) {}
 
 	// Method to calculate the total price of the books in the order, applying the discount if available
-	calculateTotalPrice(): number {
+	public calculateTotalPrice(): number {
 		let totalPrice: number = this.books.reduce((total: number, book: Book) => total + book.price, 0);
 		if (this.discount) {
 			totalPrice *= 1 - this.discount.percentage / 100;
